@@ -13,6 +13,7 @@ import Produtos from "./components/Produtos";
 import Pessoas from "./components/Pessoas";
 import Login from "./components/Login";
 import RegistroUser from "./components/RegistroUser";
+import Categoria from "./components/Categoria";
 
 // Estilos inline
 const styles = {
@@ -92,6 +93,16 @@ const App = () => {
             Produtos
           </Link>
           <Link
+            to="/categoria"
+            style={{
+              ...styles.link,
+              ...(activeLink === "/categoria" ? styles.linkHover : {}),
+            }}
+            onClick={() => handleLinkClick("/categoria")}
+          >
+            Categoria
+          </Link>
+          <Link
             to="/pessoas"
             style={{
               ...styles.link,
@@ -118,6 +129,7 @@ const App = () => {
             <Route element={<Middleware />}>
               <Route path="/" element={<Dashboard />} />
               <Route path="/produtos" element={<Produtos />} />
+              <Route path="/categoria" element={<Categoria />} />
               <Route path="/pessoas" element={<Pessoas />} />
               <Route path="/registro" element={<RegistroUser />} />
             </Route>
