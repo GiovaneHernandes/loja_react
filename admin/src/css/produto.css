@@ -1,0 +1,40 @@
+.containerProd {
+  display: flex;
+  flex-direction: column;
+}
+
+.prod {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.form_prod {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  height: 30px;
+  width: 500px;
+}
+
+.cadastrar {
+  width: 500px;
+}
+
+.forms {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+img {
+  border-radius: 10px;
+}
+
+.atulizarProduto {
+  display: flex;
+  margin-right: 100%;
+  flex-direction: column;
+}
