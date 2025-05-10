@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../css/login.css";
 
 const Login = () => {
   var [usuario, setUsuario] = useState("");
@@ -24,19 +25,26 @@ const Login = () => {
     });
   };
   return (
-    <div>
+    <div className="container-login">
       <h1>Faça seu login</h1>
       <input
+        className="user-input"
         type="text"
         placeholder="usuario"
         onChange={(e) => setUsuario(e.target.value)}
       />
       <input
+        className="user-input"
         type="password"
         placeholder="sua senha"
         onChange={(e) => setSenha(e.target.value)}
       />
-      <input type="button" value="Login" onClick={() => ValidaUsuario()} />
+      <input
+        className="login"
+        type="button"
+        value="Login"
+        onClick={() => ValidaUsuario()}
+      />
     </div>
   );
 };
