@@ -15,6 +15,8 @@ import Login from "./components/Login";
 import RegistroUser from "./components/RegistroUser";
 import Categoria from "./components/Categoria";
 
+import logoPizzaria from "./img/logo_pizzaria.png";
+
 // Estilos inline
 const styles = {
   app: {
@@ -24,8 +26,8 @@ const styles = {
   },
   sidebar: {
     width: "220px",
-    backgroundColor: "#2c3e50",
-    color: "#ecf0f1",
+    backgroundColor: "#d40004",
+    color: "#d40004",
     display: "flex",
     flexDirection: "column",
     padding: "1rem",
@@ -43,7 +45,8 @@ const styles = {
     transition: "background-color 0.3s",
   },
   linkHover: {
-    backgroundColor: "#34495e",
+    backgroundColor: "#fff7d9",
+    color: "black",
   },
   content: {
     marginLeft: "220px",
@@ -72,6 +75,7 @@ const App = () => {
     <BrowserRouter>
       <div style={styles.app}>
         <nav style={styles.sidebar}>
+          <img src={logoPizzaria} alt="Logo Pizzaria" />
           <Link
             to="/"
             style={{
