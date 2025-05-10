@@ -1,40 +1,170 @@
+/* Container principal */
 .containerProd {
-  display: flex;
-  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #f4f4f4;
+  border-radius: 10px;
 }
 
+/* Título principal */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Lista de produtos */
 .prod {
   display: flex;
-  flex-direction: row;
-  gap: 50px;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 0;
+  list-style-type: none;
+}
+
+.prod li {
+  background-color: #ffffff;
+  border: 1px solid #ecf0f1;
+  padding: 20px;
+  border-radius: 10px;
+  width: calc(33.33% - 20px);
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prod li:hover {
+  transform: scale(1.05);
+  background-color: #ecf0f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prod img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.prod img:hover {
+  transform: scale(1.05);
+}
+
+.prod h3 {
+  font-size: 1.4rem;
+  color: #34495e;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.prod p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+/* Botões */
+.prod button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.prod button:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Formulários */
+.forms {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.forms div {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forms h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: 600;
 }
 
 .form_prod {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
-input {
-  height: 30px;
-  width: 500px;
+.form_prod input,
+.form_prod select {
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form_prod input:focus,
+.form_prod select:focus {
+  border-color: #2c3e50;
+}
+
+.form_prod button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form_prod button:hover {
+  background-color: #1e8449;
+  transform: translateY(-2px);
+}
+
+/* Estilos adicionais */
+.atulizarProduto,
+.cadastrar,
+.Atualizar {
+  margin-top: 20px;
 }
 
 .cadastrar {
-  width: 500px;
+  background-color: #2980b9;
 }
 
-.forms {
-  display: flex;
-  flex-direction: row;
-  gap: 50px;
+.cadastrar:hover {
+  background-color: #2471a3;
 }
 
-img {
-  border-radius: 10px;
+.Atualizar {
+  background-color: #f39c12;
 }
 
-.atulizarProduto {
-  display: flex;
-  margin-right: 100%;
-  flex-direction: column;
+.Atualizar:hover {
+  background-color: #e67e22;
 }
