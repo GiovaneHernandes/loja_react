@@ -8,8 +8,13 @@ const Pedidos = () => {
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
 
-  const token = localStorage.getItem("ALUNO_ITE");
+  localStorage.setItem(
+    "ALUNO_ITE",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiMDEwNjIzMDcyIiwiaWF0IjoxNzQ4NDM2OTYxLCJleHAiOjE3NDg1MjMzNjF9.GiW-nyo4cKrauuXFp64kMru2XZ463OgV_mYr3Pbjt98"
+  );
 
+  // Agora lê o token normalmente
+  const token = localStorage.getItem("ALUNO_ITE");
   const pegarUsuarioDoToken = () => {
     if (!token) return "";
     try {
