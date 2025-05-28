@@ -93,13 +93,6 @@ h3 {
   align-items: center;
 }
 
-.lista-produtos {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
 .botao-produto {
   display: flex;
   flex-direction: row;
@@ -112,67 +105,10 @@ h3 {
   transition: background-color 0.2s;
   width: 600px;
   font-family: "SUSE", sans-serif;
+  justify-content: center;
 }
 
 .botao-produto:hover {
-  background-color: #9c0404;
-}
-
-.tabela-produtos-selecionados {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.tabela-produtos-selecionados th,
-.tabela-produtos-selecionados td {
-  padding: 12px 15px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-  font-family: "SUSE", sans-serif;
-}
-
-.tabela-produtos-selecionados th {
-  background-color: #cc0000;
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.tabela-produtos-selecionados tr:last-child td {
-  border-bottom: none;
-}
-
-.tabela-produtos-selecionados td img {
-  border-radius: 6px;
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-}
-
-.tabela-produtos-selecionados input[type="number"] {
-  width: 60px;
-  padding: 5px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.tabela-produtos-selecionados button {
-  background-color: #cc0000;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.tabela-produtos-selecionados button:hover {
   background-color: #9c0404;
 }
 
@@ -202,4 +138,58 @@ h3 {
   padding: 5px 10px;
   outline: none;
   transition: border-color 0.2s;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .botao-produto {
+    width: 90%;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .tabela-produtos-selecionados td img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tabela-produtos-selecionados input[type="number"] {
+    width: 45px;
+    padding: 3px;
+  }
+
+  .inpt_nome_cliente {
+    width: 90%;
+    font-size: 14px;
+  }
+
+  .container {
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabela-produtos-selecionados th,
+  .tabela-produtos-selecionados td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .tabela-produtos-selecionados td img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .botao-produto {
+    width: 100%;
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .inpt_nome_cliente {
+    width: 100%;
+    font-size: 12px;
+    padding: 5px;
+  }
 }
