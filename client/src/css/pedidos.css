@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&family=Sigmar&display=swap");
+
+.title {
+  margin-bottom: 20px;
+}
+
+.lista-produtos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.lista-produtos .tabela-produtos-selecionados {
+  width: 90%;
+  max-width: 800px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabela-produtos-selecionados th,
+.tabela-produtos-selecionados td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-family: "SUSE", sans-serif;
+}
+
+.tabela-produtos-selecionados th {
+  background-color: #cc0000;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.tabela-produtos-selecionados tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela-produtos-selecionados td img {
+  border-radius: 6px;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.tabela-produtos-selecionados input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.tabela-produtos-selecionados button {
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tabela-produtos-selecionados button:hover {
+  background-color: #9c0404;
+}
+
+body {
+  font-family: "SUSE", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Sigmar", cursive;
+}
+
+.container h1 {
+  font-family: "Sigmar", cursive;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 50px;
+  align-items: center;
+}
+
+.lista-produtos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.botao-produto {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 15px;
+  border: none;
+  background-color: #cc0000;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  width: 600px;
+  font-family: "SUSE", sans-serif;
+}
+
+.botao-produto:hover {
+  background-color: #9c0404;
+}
+
+.tabela-produtos-selecionados {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabela-produtos-selecionados th,
+.tabela-produtos-selecionados td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-family: "SUSE", sans-serif;
+}
+
+.tabela-produtos-selecionados th {
+  background-color: #cc0000;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.tabela-produtos-selecionados tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela-produtos-selecionados td img {
+  border-radius: 6px;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.tabela-produtos-selecionados input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.tabela-produtos-selecionados button {
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tabela-produtos-selecionados button:hover {
+  background-color: #9c0404;
+}
+
+.tabela-produtos-selecionados tfoot td {
+  font-weight: bold;
+  background-color: #f4f4f4;
+}
+
+.container_nome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.inpt_nome_cliente {
+  height: 30px;
+  width: 300px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  border: 2px solid #cc0000;
+  border-radius: 10px;
+  background-color: #fff8e1;
+  font-family: "Sigmar", cursive;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}

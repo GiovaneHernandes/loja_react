@@ -10,14 +10,13 @@ import {
 
 import Dashboard from "./components/Dashboard";
 import Produtos from "./components/Produtos";
-import Pessoas from "./components/Pessoas";
+import Pedidos from "./components/Pedidos";
 import Login from "./components/Login";
 import RegistroUser from "./components/RegistroUser";
 import Categoria from "./components/Categoria";
 
 import logoPizzaria from "./img/logo_pizzaria.png";
 
-// Estilos inline
 const styles = {
   app: {
     display: "flex",
@@ -75,7 +74,12 @@ const App = () => {
     <BrowserRouter>
       <div style={styles.app}>
         <nav style={styles.sidebar}>
-          <img src={logoPizzaria} alt="Logo Pizzaria" />
+          <img
+            src={logoPizzaria}
+            alt="Logo Pizzaria"
+            style={{ width: "200px", marginBottom: "1rem" }}
+          />
+
           <Link
             to="/"
             style={{
@@ -107,14 +111,14 @@ const App = () => {
             Categoria
           </Link>
           <Link
-            to="/pessoas"
+            to="/pedidos"
             style={{
               ...styles.link,
-              ...(activeLink === "/pessoas" ? styles.linkHover : {}),
+              ...(activeLink === "/pedidos" ? styles.linkHover : {}),
             }}
-            onClick={() => handleLinkClick("/pessoas")}
+            onClick={() => handleLinkClick("/pedidos  ")}
           >
-            Pessoas
+            Pedidos
           </Link>
           <Link
             to="/registro"
@@ -134,7 +138,7 @@ const App = () => {
               <Route path="/" element={<Dashboard />} />
               <Route path="/produtos" element={<Produtos />} />
               <Route path="/categoria" element={<Categoria />} />
-              <Route path="/pessoas" element={<Pessoas />} />
+              <Route path="/pedidos" element={<Pedidos />} />
               <Route path="/registro" element={<RegistroUser />} />
             </Route>
           </Routes>

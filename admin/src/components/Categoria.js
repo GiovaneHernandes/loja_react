@@ -119,48 +119,60 @@ const Categorias = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Categorias</h1>
+    <div className="categorias-container">
+      <h1 className="categorias-titulo">Categorias</h1>
 
-      <form onSubmit={criarCategoria}>
+      <form onSubmit={criarCategoria} className="categorias-form">
         <input
           type="text"
           placeholder="Nova categoria"
           value={novaCategoria}
           onChange={(e) => setNovaCategoria(e.target.value)}
           required
+          className="categorias-input"
         />
-        <button type="submit">Criar</button>
+        <button type="submit" className="categorias-botao">
+          Criar
+        </button>
       </form>
 
-      <ul>
+      <ul className="categorias-lista">
         {categorias.map((categoria) => (
-          <li key={categoria._id}>
+          <li key={categoria._id} className="categorias-item">
             {categoria.nome}
-            <button onClick={() => excluirCategoria(categoria._id)}>
-              Excluir
-            </button>
-            <button
-              onClick={() => carregarCategoriaParaAtualizar(categoria._id)}
-            >
-              Atualizar
-            </button>
+            <div>
+              <button
+                onClick={() => excluirCategoria(categoria._id)}
+                className="categorias-botao"
+              >
+                Excluir
+              </button>
+              <button
+                onClick={() => carregarCategoriaParaAtualizar(categoria._id)}
+                className="categorias-botao"
+              >
+                Atualizar
+              </button>
+            </div>
           </li>
         ))}
       </ul>
 
-      {/* Formulário para atualizar a categoria */}
       {categoriaId && (
-        <form onSubmit={atualizarCategoria}>
-          <h2>Atualizar Categoria</h2>
+        <form onSubmit={atualizarCategoria} className="categorias-form">
+          <h2 className="categorias-subtitulo">Atualizar Categoria</h2>
           <input
             type="text"
             placeholder="Nome da categoria"
             value={novaCategoria}
             onChange={(e) => setNovaCategoria(e.target.value)}
             required
+            className="categorias-input"
           />
-          <button className="bt_atulizar" type="submit">
+          <button
+            type="submit"
+            className="categorias-botao categorias-botao-atualizar"
+          >
             Atualizar
           </button>
         </form>

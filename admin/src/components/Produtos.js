@@ -27,17 +27,43 @@ const Produtos = () => {
   });
 
   const token = localStorage.getItem("ALUNO_ITE");
-  const url = "https://backend-completo.vercel.app/app/produtos";
 
-  // Função para carregar os produtos
-  const carregarProdutos = () => {
-    axios
-      .get(url, { headers: { Authorization: `Bearer ${token}` } })
-      .then((response) => setProdutos(response.data))
-      .catch((erro) => console.log("Erro ao buscar produtos:", erro));
+  // Você precisa extrair o usuário do token (JWT) para passar na URL
+  // Vou fazer uma função simples para isso:
+  const pegarUsuarioDoToken = () => {
+    if (!token) return "";
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      return payload.usuario || "";
+    } catch {
+      return "";
+    }
   };
 
-  // Função para carregar as categorias
+  const usuario = pegarUsuarioDoToken();
+
+  // Para listar produtos, passar nomeProduto como string vazia para listar todos
+  const listarProdutos = async (nomeProduto = "") => {
+    if (!usuario) {
+      console.error("Usuário não encontrado no token.");
+      return;
+    }
+    const url = `https://backend-completo.vercel.app/app/produtos/${usuario}/${nomeProduto}`;
+    try {
+      const response = await axios.get(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (Array.isArray(response.data)) {
+        setProdutos(response.data);
+      } else {
+        setProdutos([]);
+        console.error("Resposta inválida: não é um array");
+      }
+    } catch (erro) {
+      console.log("Erro ao buscar produtos:", erro);
+    }
+  };
+
   const carregarCategorias = () => {
     axios
       .get("https://backend-completo.vercel.app/app/categorias", {
@@ -48,7 +74,7 @@ const Produtos = () => {
   };
 
   useEffect(() => {
-    carregarProdutos();
+    listarProdutos(); // lista todos os produtos do usuário
     carregarCategorias();
   }, []);
 
@@ -62,11 +88,21 @@ const Produtos = () => {
     }
   };
 
-  // Função para cadastrar um novo produto
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!usuario) {
+      alert("Usuário não encontrado para cadastrar produto.");
+      return;
+    }
+
+    // adiciona o usuário ao formulário antes de enviar
+    const novoProduto = { ...formulario, usuario };
+
     axios
-      .post(url, formulario, { headers: { Authorization: `Bearer ${token}` } })
+      .post("https://backend-completo.vercel.app/app/produtos", novoProduto, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(() => {
         alert("Produto cadastrado com sucesso!");
         setFormulario({
@@ -78,17 +114,16 @@ const Produtos = () => {
           usuario: "",
           imagem: "",
         });
-        carregarProdutos();
+        listarProdutos();
       })
       .catch((erro) => console.log("Erro ao criar produto:", erro));
   };
 
-  // Função para deletar um produto
   const prodDelete = (id) => {
     if (!window.confirm("Tem certeza que deseja deletar este produto?")) return;
 
     axios
-      .delete(url, {
+      .delete("https://backend-completo.vercel.app/app/produtos", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -97,14 +132,15 @@ const Produtos = () => {
       })
       .then(() => {
         alert("Produto deletado com sucesso!");
-        carregarProdutos();
+        listarProdutos();
       })
       .catch((erro) => console.log("Erro ao deletar produto:", erro));
   };
 
-  // Função para buscar um produto por ID
+  // Buscar produto por id para edição (usa endpoint geral e filtra)
   const buscarProdutoPorId = async (id) => {
     try {
+      const url = `https://backend-completo.vercel.app/app/produtos/${usuario}/`;
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -128,7 +164,6 @@ const Produtos = () => {
     }
   };
 
-  // Função para atualizar um produto
   const handleAtualizar = (e) => {
     e.preventDefault();
 
@@ -138,12 +173,16 @@ const Produtos = () => {
     }
 
     axios
-      .put(url, formularioEdicao, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .put(
+        "https://backend-completo.vercel.app/app/produtos",
+        formularioEdicao,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then(() => {
         alert("Produto atualizado com sucesso!");
         setFormularioEdicao({
@@ -156,7 +195,7 @@ const Produtos = () => {
           usuario: "",
           imagem: "",
         });
-        carregarProdutos();
+        listarProdutos();
       })
       .catch((erro) => console.log("Erro ao atualizar produto:", erro));
   };
@@ -168,18 +207,14 @@ const Produtos = () => {
       <ul className="prod">
         {produtos.map((produto) => (
           <li key={produto._id}>
-            <p>{produto._id}</p>
+            <p>ID: {produto._id}</p>
             <img src={produto.imagem} alt={produto.nome} width="100" />
             <h3>{produto.nome}</h3>
-            <p>
-              Categoria:{" "}
-              {typeof produto.categoria === "object"
-                ? produto.categoria.nome
-                : produto.categoria}
-            </p>
+            <p>Categoria: {produto.categoria}</p>
             <p>Preço: R$ {produto.preco}</p>
             <p>Quantidade: {produto.quantidade}</p>
             <p>{produto.descricao}</p>
+            <p>Usuário: {produto.usuario}</p>
             <button onClick={() => prodDelete(produto._id)}>❌ Deletar</button>
           </li>
         ))}
@@ -239,9 +274,8 @@ const Produtos = () => {
               type="text"
               name="usuario"
               placeholder="Usuário"
-              value={formulario.usuario}
-              onChange={(e) => handleChange(e, "formulario")}
-              required
+              value={usuario}
+              readOnly
             />
             <input
               type="text"
