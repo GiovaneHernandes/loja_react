@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+import "../css/pedidos.css";
 
 const Pedidos = () => {
   const [vendas, setVendas] = useState([]);
@@ -18,38 +20,61 @@ const Pedidos = () => {
 
   const usuario = pegarUsuarioDoToken();
 
+  // Função para buscar as vendas
+  const fetchVendas = async () => {
+    if (!usuario) {
+      console.error("Usuário não encontrado no token.");
+      setCarregando(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `https://backend-completo.vercel.app/app/venda?usuario=${usuario}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (!res.ok) throw new Error("Erro ao buscar vendas.");
+
+      const data = await res.json();
+      setVendas(data);
+    } catch (error) {
+      console.error("Erro ao buscar vendas:", error);
+    } finally {
+      setCarregando(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchVendas = async () => {
-      if (!usuario) {
-        console.error("Usuário não encontrado no token.");
-        setCarregando(false);
-        return;
-      }
-
-      try {
-        const res = await fetch(
-          `https://backend-completo.vercel.app/app/venda?usuario=${usuario}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: "application/json",
-            },
-          }
-        );
-
-        if (!res.ok) throw new Error("Erro ao buscar vendas.");
-
-        const data = await res.json();
-        setVendas(data);
-      } catch (error) {
-        console.error("Erro ao buscar vendas:", error);
-      } finally {
-        setCarregando(false);
-      }
-    };
-
     fetchVendas();
+    // eslint-disable-next-line
   }, [token, usuario]);
+
+  // Função para excluir uma venda
+  const excluirVenda = async (id) => {
+    if (!window.confirm("Deseja realmente deletar esta venda?")) return;
+
+    try {
+      await axios.delete("https://backend-completo.vercel.app/app/venda", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        data: { id },
+      });
+
+      alert("Venda deletada!");
+      fetchVendas();
+    } catch (erro) {
+      console.error("Erro ao deletar venda:", erro);
+      alert("Não foi possível excluir a venda. Tente novamente.");
+    }
+  };
 
   return (
     <div className="container">
@@ -90,6 +115,14 @@ const Pedidos = () => {
                 .reduce((acc, p) => acc + p.quantidade * p.preco, 0)
                 .toFixed(2)}
             </p>
+
+            <button
+              onClick={() => excluirVenda(venda._id)}
+              className="btn-excluir"
+            >
+              Excluir
+            </button>
+
             <hr />
           </div>
         ))
