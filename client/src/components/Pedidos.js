@@ -14,6 +14,7 @@ const Pedidos = () => {
   );
 
   // Agora lê o token normalmente
+  const oi = () => {};
   const token = localStorage.getItem("ALUNO_ITE");
   const pegarUsuarioDoToken = () => {
     if (!token) return "";
