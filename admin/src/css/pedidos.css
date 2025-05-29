@@ -1,0 +1,76 @@
+/* arquivo: pedidos.css */
+
+.card-venda {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-venda:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-venda h3 {
+  margin-top: 0;
+  color: #d40004; /* vermelho */
+}
+
+.card-venda p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.card-venda table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.card-venda th,
+.card-venda td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.card-venda th {
+  background-color: #d40004; /* vermelho */
+  color: white;
+}
+
+.card-venda tbody tr:nth-child(even) {
+  background-color: #fcebea; /* fundo vermelho clarinho */
+}
+
+.card-venda strong {
+  font-weight: 600;
+  color: #b22222; /* vermelho escuro */
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin-top: 15px;
+}
+
+.btn-excluir {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-top: 8px;
+}
+
+.btn-excluir:hover {
+  background-color: #e74c3c;
+}
