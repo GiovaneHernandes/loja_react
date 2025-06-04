@@ -10,7 +10,7 @@ const Pedidos = () => {
 
   localStorage.setItem(
     "ALUNO_ITE",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiMDEwNjIzMDcyIiwiaWF0IjoxNzQ4NDM2OTYxLCJleHAiOjE3NDg1MjMzNjF9.GiW-nyo4cKrauuXFp64kMru2XZ463OgV_mYr3Pbjt98"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiMDEwNjIzMDcyIiwiaWF0IjoxNzQ5MDc2MTM5LCJleHAiOjE3NDkxNjI1Mzl9.jDcg_UvATccqRvtbAcbrg_2G3XLF5g5jchhVqTjiFFw"
   );
 
   // Agora lê o token normalmente
