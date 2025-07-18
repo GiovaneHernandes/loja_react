@@ -7,34 +7,64 @@ const Pedidos = () => {
   const [todosProdutos, setTodosProdutos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("ALUNO_ITE") || "");
+  const [usuario, setUsuario] = useState("");
 
-  localStorage.setItem(
-    "ALUNO_ITE",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiMDEwNjIzMDcyIiwiaWF0IjoxNzQ5MDc2MTM5LCJleHAiOjE3NDkxNjI1Mzl9.jDcg_UvATccqRvtbAcbrg_2G3XLF5g5jchhVqTjiFFw"
-  );
+  // Faz login automático ao iniciar
+  useEffect(() => {
+    const realizarLoginAutomatico = async () => {
+      if (!token) {
+        try {
+          const response = await fetch(
+            "https://backend-completo.vercel.app/app/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                usuario: "010623072",
+                senha: "010623072",
+              }),
+            }
+          );
 
-  // Agora lê o token normalmente
+          if (!response.ok) {
+            throw new Error("Erro ao fazer login");
+          }
 
-  const token = localStorage.getItem("ALUNO_ITE");
-  const pegarUsuarioDoToken = () => {
-    if (!token) return "";
-    try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      return payload.usuario || "";
-    } catch {
-      return "";
+          const data = await response.json();
+
+          if (data.token) {
+            localStorage.setItem("ALUNO_ITE", data.token);
+            setToken(data.token);
+            console.log("Login automático realizado com sucesso!");
+          }
+        } catch (error) {
+          console.error("Erro ao fazer login automático:", error);
+        }
+      }
+    };
+
+    realizarLoginAutomatico();
+  }, [token]);
+
+  // Extrai o usuário do token
+  useEffect(() => {
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        setUsuario(payload.usuario || "");
+      } catch (error) {
+        console.error("Erro ao decodificar o token:", error);
+      }
     }
-  };
-
-  const usuario = pegarUsuarioDoToken();
+  }, [token]);
 
   // Busca produtos
   useEffect(() => {
     const fetchProdutos = async () => {
-      if (!usuario) {
-        console.error("Usuário não encontrado no token.");
-        return;
-      }
+      if (!usuario || !token) return;
       try {
         const res = await fetch(
           `https://backend-completo.vercel.app/app/produtos/${usuario}/`,
@@ -58,6 +88,7 @@ const Pedidos = () => {
 
   // Busca categorias
   const listaCategoria = async () => {
+    if (!token) return;
     try {
       const resposta = await fetch(
         "https://backend-completo.vercel.app/app/categorias",
@@ -76,7 +107,7 @@ const Pedidos = () => {
 
   useEffect(() => {
     listaCategoria();
-  }, []);
+  }, [token]);
 
   // Adiciona produto
   const adicionarProdutoNoPedido = (produto) => {
@@ -93,7 +124,7 @@ const Pedidos = () => {
             nome: produto.nome,
             quantidade: 1,
             preco: produto.preco,
-            imagem: produto.imagem, // guardando imagem para mostrar depois
+            imagem: produto.imagem,
           },
         ];
       }
@@ -180,7 +211,6 @@ const Pedidos = () => {
           />
         </div>
 
-        {/* Botões de categorias */}
         <h3>Categorias</h3>
         <div style={{ marginBottom: "1rem" }}>
           {categorias.map((categoria) => (
@@ -280,7 +310,6 @@ const Pedidos = () => {
             ))}
         </div>
 
-        {/* Produtos selecionados */}
         {produtosSelecionados.length > 0 && (
           <>
             <h3>Produtos selecionados</h3>
